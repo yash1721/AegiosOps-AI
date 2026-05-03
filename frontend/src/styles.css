@@ -11,3 +11,56 @@
 body {
   margin: 0;
 }
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@layer components {
+  .button-primary {
+    @apply inline-flex items-center justify-center rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-700;
+  }
+
+  .button-secondary {
+    @apply inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50;
+  }
+
+  .button-danger {
+    @apply inline-flex items-center justify-center rounded-md bg-rose-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-rose-700;
+  }
+
+  .field {
+    @apply w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200;
+  }
+
+  .data-table {
+    @apply min-w-full divide-y divide-slate-200 text-left text-sm;
+  }
+
+  .data-table thead {
+    @apply bg-slate-50 text-xs font-semibold uppercase text-slate-500;
+  }
+
+  .data-table th {
+    @apply px-4 py-3;
+  }
+
+  .data-table tbody {
+    @apply divide-y divide-slate-100 bg-white;
+  }
+
+  .data-table td {
+    @apply px-4 py-3 text-slate-700;
+  }
+
+  .data-table tbody tr {
+    @apply hover:bg-slate-50;
+  }
+}
