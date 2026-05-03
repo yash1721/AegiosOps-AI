@@ -17,6 +17,30 @@ Response:
 }
 ```
 
+### POST /api/v1/runbooks
+
+Uploads a runbook, chunks it, and attempts embedding/Qdrant indexing.
+
+Request:
+
+```json
+{
+  "serviceName": "checkout",
+  "title": "Checkout CPU Remediation",
+  "content": "Long runbook text..."
+}
+```
+
+The response includes chunk metadata plus `indexed` and `indexingError` fields. Upload still succeeds if embedding or Qdrant indexing fails.
+
+### GET /api/v1/runbooks
+
+Returns runbooks ordered by creation time descending. List responses omit full content and chunks.
+
+### GET /api/v1/runbooks/{runbookId}
+
+Returns runbook detail with full content and chunk metadata.
+
 ## Planned V1 Endpoints
 
 ```text
