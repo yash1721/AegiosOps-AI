@@ -35,4 +35,6 @@ aegisops:
       chat-model: ${OLLAMA_CHAT_MODEL:llama3.1}
       embedding-model: ${OLLAMA_EMBEDDING_MODEL:nomic-embed-text}
     openai:
+      base-url: ${OPENAI_BASE_URL:https://api.openai.com/v1}
+      chat-model: ${OPENAI_CHAT_MODEL:gpt-4o-mini}
       api-key: ${OPENAI_API_KEY:}

@@ -41,6 +41,10 @@ Returns runbooks ordered by creation time descending. List responses omit full c
 
 Returns runbook detail with full content and chunk metadata.
 
+### POST /api/v1/incidents/{incidentId}/analyze
+
+Runs AI-assisted incident analysis using the configured LLM provider and retrieved runbook context. The response includes summary, probable root cause, ordered remediation steps, confidence, model used, and human-approval requirement.
+
 ## Planned V1 Endpoints
 
 ```text
