@@ -11,14 +11,14 @@ AegisOps is an AI-assisted operations platform for deduplicating alerts into inc
 
 ## Current Status
 
-Foundation setup.
+Local development stack.
 
 The repository currently includes:
 
-- Spring Boot backend scaffold
-- React Vite frontend scaffold with Tailwind
-- Docker Compose infrastructure for PostgreSQL, Redis, and Qdrant
-- Health endpoint at `GET /api/v1/health`
+- Spring Boot backend APIs for incidents, runbooks, AI analysis, approvals, resolution, and audit logs
+- React Vite operations console with Tailwind
+- Docker Compose stack for PostgreSQL, Redis, Qdrant, backend, and frontend
+- Local seed endpoint enabled only under the `local` or `dev` Spring profile
 - Initial API, architecture, and demo-flow documentation
 - Shared `AGENTS.md` engineering contract
 
@@ -32,6 +32,7 @@ Required variables:
 SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/aegisops
 SPRING_DATASOURCE_USERNAME=postgres
 SPRING_DATASOURCE_PASSWORD=postgres
+SPRING_PROFILES_ACTIVE=local
 REDIS_HOST=localhost
 REDIS_PORT=6379
 QDRANT_URL=http://localhost:6333
@@ -50,35 +51,47 @@ VITE_API_BASE_URL=http://localhost:8080/api/v1
 
 The `.env.example` file uses Docker service hostnames for container-oriented defaults. When running backend locally against Docker Compose infrastructure, use `localhost` hostnames as shown above.
 
-## Start Infrastructure
+## Start Docker Stack
 
-Start PostgreSQL, Redis, and Qdrant:
+Build and start PostgreSQL, Redis, Qdrant, backend, and frontend:
 
 ```bash
 make docker-up
 ```
 
-Stop infrastructure:
+Stop the Docker stack:
 
 ```bash
 make docker-down
 ```
 
-## Run Backend Locally
+Seed local demo data:
+
+```bash
+make seed
+```
+
+Run the scripted demo flow:
+
+```bash
+make demo
+```
+
+## Run Backend Locally Without Dockerized Backend
 
 Prerequisites:
 
 - Java 21
-- Infrastructure running with `make docker-up`
+- Java 21
+- Maven
+- PostgreSQL, Redis, and Qdrant available locally or through Docker Compose
 
 Run:
 
 ```bash
 cd backend
-./mvnw spring-boot:run
+mvn spring-boot:run
 ```
-
-On Windows, use `mvnw.cmd spring-boot:run`.
 
 Health check:
 
@@ -95,7 +108,7 @@ Expected response:
 }
 ```
 
-## Run Frontend Locally
+## Run Frontend Locally Without Dockerized Frontend
 
 Prerequisites:
 
@@ -117,10 +130,8 @@ Backend:
 
 ```bash
 cd backend
-./mvnw test
+mvn test
 ```
-
-On Windows, use `mvnw.cmd test`.
 
 Frontend:
 
