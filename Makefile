@@ -1,23 +1,23 @@
 .PHONY: backend frontend test docker-up docker-down seed demo
 
 backend:
-	cd backend && ./mvnw spring-boot:run
+	cd backend && mvn spring-boot:run
 
 frontend:
-	cd frontend && npm run dev
+	cd frontend && npm install && npm run dev
 
 test:
-	cd backend && ./mvnw test
+	cd backend && mvn test
 	cd frontend && npm run build
 
 docker-up:
-	docker compose up -d postgres redis qdrant
+	docker compose up --build
 
 docker-down:
 	docker compose down
 
 seed:
-	@echo "Seed data command is not implemented yet."
+	curl -X POST http://localhost:8080/api/v1/dev/seed
 
 demo:
-	@echo "Demo command is not implemented yet."
+	bash scripts/demo-flow.sh
