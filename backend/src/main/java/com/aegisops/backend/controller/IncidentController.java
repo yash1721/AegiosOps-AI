@@ -2,8 +2,10 @@ package com.aegisops.backend.controller;
 
 import com.aegisops.backend.dto.ApprovalResponse;
 import com.aegisops.backend.dto.ApproveIncidentRequest;
+import com.aegisops.backend.dto.IncidentAnalysisResponse;
 import com.aegisops.backend.dto.IncidentDetailResponse;
 import com.aegisops.backend.dto.IncidentResponse;
+import com.aegisops.backend.service.IncidentAnalysisService;
 import com.aegisops.backend.service.IncidentService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +23,11 @@ import java.util.UUID;
 public class IncidentController {
 
     private final IncidentService incidentService;
+    private final IncidentAnalysisService incidentAnalysisService;
 
-    public IncidentController(IncidentService incidentService) {
+    public IncidentController(IncidentService incidentService, IncidentAnalysisService incidentAnalysisService) {
         this.incidentService = incidentService;
+        this.incidentAnalysisService = incidentAnalysisService;
     }
 
     @GetMapping
@@ -42,6 +46,11 @@ public class IncidentController {
             @Valid @RequestBody ApproveIncidentRequest request
     ) {
         return incidentService.approveIncident(incidentId, request);
+    }
+
+    @PostMapping("/{incidentId}/analyze")
+    public IncidentAnalysisResponse analyzeIncident(@PathVariable UUID incidentId) {
+        return incidentAnalysisService.analyzeIncident(incidentId);
     }
 
     @PostMapping("/{incidentId}/resolve")
