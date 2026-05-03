@@ -1,0 +1,35 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: aegisops-backend
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/aegisops}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+aegisops:
+  qdrant:
+    url: ${QDRANT_URL:http://localhost:6333}
+    collection: ${QDRANT_COLLECTION:aegisops_runbooks}
+  llm:
+    provider: ${LLM_PROVIDER:mock}
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat-model: ${OLLAMA_CHAT_MODEL:llama3.1}
+      embedding-model: ${OLLAMA_EMBEDDING_MODEL:nomic-embed-text}
+    openai:
+      api-key: ${OPENAI_API_KEY:}

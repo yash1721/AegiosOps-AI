@@ -1,0 +1,10 @@
+.env
+.env.local
+.DS_Store
+Thumbs.db
+.tools/
+apache-maven-*-bin.zip
+
+backend/target/
+frontend/node_modules/
+frontend/dist/
